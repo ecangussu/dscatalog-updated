@@ -3,6 +3,7 @@ package com.ehcs.dscatalog.services;
 import com.ehcs.dscatalog.DTO.CategoryDTO;
 import com.ehcs.dscatalog.entities.Category;
 import com.ehcs.dscatalog.repositories.CategoryRepository;
+import com.ehcs.dscatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
         Optional<Category> category = repository.findById(id);
-        return new CategoryDTO(category.get());
+        return new CategoryDTO(category.orElseThrow(() -> new ResourceNotFoundException("Resource Not found")));
     }
 
 }
