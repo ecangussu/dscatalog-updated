@@ -18,6 +18,4 @@ public class CategoryDTO {
         this.name = entity.getName();
     }
 
-    //test
-
 }
